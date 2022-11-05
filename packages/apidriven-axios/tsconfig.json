@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "module": "ES2015",
+    "esModuleInterop": true,
+    "target": "ES2015",
+    "moduleResolution": "node",
+    "strict": true,
+    "outDir": "dist",
+    "noImplicitAny": true,
+    "declaration": true,
+    "lib": ["DOM", "ES2015"]
+  },
+}

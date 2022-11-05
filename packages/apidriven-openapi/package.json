@@ -1,0 +1,16 @@
+{
+  "name": "apidriven-openapi",
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "devDependencies": {
+    "typescript": "4.8.4"
+  },
+  "dependencies": {
+    "zod": "^3.19.1",
+    "zod-to-json-schema": "^3.18.1",
+    "apidriven": "~0.0.1"
+  }
+}
