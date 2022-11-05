@@ -1,6 +1,10 @@
 {
   "name": "apidriven",
-  "version": "0.0.1",
+  "version": "0.0.0",
+  "author": "Antal Latinovits",
+  "license": "MIT",
+  "description": "Common REST API definition to reuse on both frontend and backend in a type-safe way",
+  "files": ["dist"],
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc --build"

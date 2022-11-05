@@ -1,6 +1,10 @@
 {
   "name": "apidriven-axios",
-  "version": "0.0.1",
+  "version": "0.0.0",
+  "description": "Type-safe client implementation for the common REST API definition on top of Axios",
+  "files": ["dist"],
+  "author": "Antal Latinovits",
+  "license": "MIT",
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc --build"
@@ -10,7 +14,7 @@
   },
   "dependencies": {
     "axios": "^1.1.2",
-    "apidriven": "~0.0.1",
+    "apidriven": "~0.0.0",
     "zod": "^3.19.1"
   }
 }

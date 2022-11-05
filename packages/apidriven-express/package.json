@@ -1,6 +1,10 @@
 {
   "name": "apidriven-express",
-  "version": "0.0.1",
+  "version": "0.0.0",
+  "author": "Antal Latinovits",
+  "license": "MIT",
+  "description": "Type-safe routing implementation for the common REST API definition on top of Express.js",
+  "files": ["dist"],
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc --build"
@@ -12,6 +16,6 @@
   "dependencies": {
     "zod": "^3.19.1",
     "express": "^4.18.2",
-    "apidriven": "~0.0.1"
+    "apidriven": "~0.0.0"
   }
 }

@@ -1,6 +1,10 @@
 {
   "name": "apidriven-openapi",
-  "version": "0.0.1",
+  "version": "0.0.0",
+  "author": "Antal Latinovits",
+  "license": "MIT",
+  "description": "OpenAPI specification generator for the common REST API definition",
+  "files": ["dist"],
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc --build"
@@ -11,6 +15,6 @@
   "dependencies": {
     "zod": "^3.19.1",
     "zod-to-json-schema": "^3.18.1",
-    "apidriven": "~0.0.1"
+    "apidriven": "~0.0.0"
   }
 }
