@@ -9,6 +9,9 @@
     "outDir": "dist",
     "noImplicitAny": true,
     "declaration": true,
-    "lib": ["DOM", "ES2015"]
+    "declarationMap": true,
+    "lib": ["DOM", "ES2015"],
+    "types": ["jest"]
   },
+  "include": ["src/**/*"]
 }

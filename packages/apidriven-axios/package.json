@@ -7,14 +7,27 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "tsc --build"
-  },
-  "devDependencies": {
-    "typescript": "4.8.4"
+    "build": "tsc --project tsconfig.build.json",
+    "start": "nodemon",
+    "test": "jest --coverage",
+    "lint": "mkdirp lint && eslint src > lint/apidriven-axios.lint.log"
   },
   "dependencies": {
-    "axios": "^1.1.2",
-    "apidriven": "~0.0.0",
-    "zod": "^3.19.1"
+    "axios": "1.1.2",
+    "apidriven": "0.0.0",
+    "zod": "3.19.1"
+  },
+  "devDependencies": {
+    "typescript": "4.8.4",
+    "ts-node": "10.9.1",
+    "nodemon": "2.0.20",
+    "jest": "29.3.1",
+    "jest-junit": "14.0.1",
+    "ts-jest": "29.0.3",
+    "@types/jest": "29.2.3",
+    "eslint": "8.20.0",
+    "@typescript-eslint/eslint-plugin": "5.36.2",
+    "@typescript-eslint/parser": "5.36.2",
+    "mkdirp": "1.0.4"
   }
 }

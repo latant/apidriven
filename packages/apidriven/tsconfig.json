@@ -9,6 +9,9 @@
     "outDir": "dist",
     "noImplicitAny": true,
     "declaration": true,
-    "lib": ["ES2020"]
+    "declarationMap": true,
+    "lib": ["ES2020"],
+    "types": ["jest"]
   },
+  "include": ["src/**/*"]
 }

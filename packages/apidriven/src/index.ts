@@ -1,13 +1,14 @@
-import { z } from 'zod'
-import * as oas from "./openapiTypes"
+/* eslint-disable @typescript-eslint/ban-types */
+import { z } from "zod";
+import * as oas from "./openapiTypes";
 
-export { oas }
+export { oas };
 
 export type OpenApiSpec = oas.HttpsSpecOpenapisOrgOas30Schema20210928
 
 export type ApiModel = {
   endpoints: { [key: string]: EndpointModel }
-  docs: Omit<OpenApiSpec, 'openapi' | 'paths'>
+  docs: Omit<OpenApiSpec, "openapi" | "paths">
 }
 
 export type EndpointModel = {
@@ -22,16 +23,16 @@ export type EndpointModel = {
   docs?: Partial<oas.Operation>
 }
 
-type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch' | 'options' | 'head'
+type HttpMethod = "get" | "post" | "put" | "delete" | "patch" | "options" | "head"
 
 export type EndpointRequestParams<E extends EndpointModel> = EndpointModel extends E
   ? Record<string, unknown>
-  : ({} extends RouteParameters<E['path']> ? {} : RouteParameters<E['path']>) &
-      (E['query'] extends { [key: string]: z.ZodType } ? { [K in keyof E['query']]: z.infer<E['query'][K]> } : {}) &
-      (E['headers'] extends { [key: string]: z.ZodType } ? { [K in keyof E['headers']]: z.infer<E['headers'][K]> } : {})
+  : ({} extends RouteParameters<E["path"]> ? {} : RouteParameters<E["path"]>) &
+      (E["query"] extends { [key: string]: z.ZodType } ? z.infer<z.ZodObject<E["query"]>> : {}) &
+      (E["headers"] extends { [key: string]: z.ZodType } ? z.infer<z.ZodObject<E["headers"]>> : {})
 
 function endpointFactory<M extends HttpMethod>(method: M) {
-  return function <E extends Omit<EndpointModel, 'method' | 'path' | 'params'>, P extends string>(
+  return function <E extends Omit<EndpointModel, "method" | "path" | "params">, P extends string>(
     path: P,
     opts: E,
   ): E & { method: M; path: P; params: string[] } {
@@ -40,20 +41,20 @@ function endpointFactory<M extends HttpMethod>(method: M) {
       method,
       path,
       params: (path.match(/:[^/]+/) || []).map((m) => m.toString().substring(1)),
-    }
-  }
+    };
+  };
 }
 
-export const GET = endpointFactory('get')
-export const POST = endpointFactory('post')
-export const PUT = endpointFactory('put')
-export const DELETE = endpointFactory('delete')
-export const PATCH = endpointFactory('patch')
-export const OPTIONS = endpointFactory('options')
-export const HEAD = endpointFactory('head')
+export const GET = endpointFactory("get");
+export const POST = endpointFactory("post");
+export const PUT = endpointFactory("put");
+export const DELETE = endpointFactory("delete");
+export const PATCH = endpointFactory("patch");
+export const OPTIONS = endpointFactory("options");
+export const HEAD = endpointFactory("head");
 
 export function apiDefinition<A extends ApiModel>(api: A): A {
-  return api
+  return api;
 }
 
 // based on express library

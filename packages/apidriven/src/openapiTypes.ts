@@ -17,24 +17,24 @@ export type SchemaXORContent = {
  */
 export type ParameterLocation =
   | {
-      in?: 'path'
-      style?: 'matrix' | 'label' | 'simple'
+      in?: "path"
+      style?: "matrix" | "label" | "simple"
       required: true
       [k: string]: unknown
     }
   | {
-      in?: 'query'
-      style?: 'form' | 'spaceDelimited' | 'pipeDelimited' | 'deepObject'
+      in?: "query"
+      style?: "form" | "spaceDelimited" | "pipeDelimited" | "deepObject"
       [k: string]: unknown
     }
   | {
-      in?: 'header'
-      style?: 'simple'
+      in?: "header"
+      style?: "simple"
       [k: string]: unknown
     }
   | {
-      in?: 'cookie'
-      style?: 'form'
+      in?: "cookie"
+      style?: "form"
       [k: string]: unknown
     }
 export type MediaType = ExampleXORExamples
@@ -336,7 +336,7 @@ export interface Schema {
    * @minItems 1
    */
   enum?: [unknown, ...unknown[]]
-  type?: 'array' | 'boolean' | 'integer' | 'number' | 'object' | 'string'
+  type?: "array" | "boolean" | "integer" | "number" | "object" | "string"
   not?: Schema | Reference
   allOf?: Array<Schema | Reference>
   oneOf?: Array<Schema | Reference>
@@ -394,9 +394,9 @@ export interface Example {
   [k: string]: unknown
 }
 export interface APIKeySecurityScheme {
-  type: 'apiKey'
+  type: "apiKey"
   name: string
-  in: 'header' | 'query' | 'cookie'
+  in: "header" | "query" | "cookie"
   description?: string
   /**
    * This interface was referenced by `APIKeySecurityScheme`'s JSON-Schema definition
@@ -405,7 +405,7 @@ export interface APIKeySecurityScheme {
   [k: string]: unknown
 }
 export interface OAuth2SecurityScheme {
-  type: 'oauth2'
+  type: "oauth2"
   flows: OAuthFlows
   description?: string
   /**
@@ -475,7 +475,7 @@ export interface AuthorizationCodeOAuthFlow {
   [k: string]: unknown
 }
 export interface OpenIdConnectSecurityScheme {
-  type: 'openIdConnect'
+  type: "openIdConnect"
   openIdConnectUrl: string
   description?: string
   /**

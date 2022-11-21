@@ -1,0 +1,8 @@
+{
+  "eslint.workingDirectories": [
+    "packages/apidriven",
+    "packages/apidriven-axios",
+    "packages/apidriven-express",
+    "packages/apidriven-openapi",
+  ]
+}
