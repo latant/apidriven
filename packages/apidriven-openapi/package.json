@@ -5,7 +5,7 @@
   "license": "MIT",
   "description": "OpenAPI specification generator for the common REST API definition",
   "files": ["dist"],
-  "main": "./dist/index.js",
+  "main": "./dist/apidrivenOpenapi.js",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "start": "nodemon",

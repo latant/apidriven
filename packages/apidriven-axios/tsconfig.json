@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "module": "ES2015",
+    "module": "CommonJS",
     "esModuleInterop": true,
     "target": "ES2015",
     "moduleResolution": "node",

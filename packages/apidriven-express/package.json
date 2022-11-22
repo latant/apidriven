@@ -5,7 +5,7 @@
   "license": "MIT",
   "description": "Type-safe routing implementation for the common REST API definition on top of Express.js",
   "files": ["dist"],
-  "main": "./dist/index.js",
+  "main": "./dist/apidrivenExpress.js",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "start": "nodemon",

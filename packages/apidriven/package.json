@@ -5,7 +5,7 @@
   "license": "MIT",
   "description": "Common REST API definition to reuse on both frontend and backend in a type-safe way",
   "files": ["dist"],
-  "main": "./dist/index.js",
+  "main": "./dist/apidriven.js",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "start": "nodemon",

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { z } from "zod";
@@ -25,13 +26,17 @@ type ApiClientImpl<E extends ApiModel["endpoints"]> = {
   [K in keyof E]: (config: EndpointRequestConfig<E[K]>) => Promise<EndpointResponse<E[K]>>
 }
 
-export function apiClient<A extends ApiModel>(api: A, axiosInstance: AxiosInstance): ApiClientImpl<A["endpoints"]> {
+type MakeRequest = (a: AxiosInstance, r: AxiosRequestConfig<any>) => Promise<AxiosResponse<any, any>>
+
+export function apiClient<A extends ApiModel>(
+  api: A, axiosInstance: AxiosInstance, makeRequest: MakeRequest = (a, r) => a.request(r)
+): ApiClientImpl<A["endpoints"]> {
   const client = {} as Record<string, unknown>;
   for (const k in api.endpoints) {
     const endpoint = api.endpoints[k];
     client[k] = (config: EndpointRequestConfig) => {
       const { params } = config as { params: { [key: string]: unknown } };
-      const { headers, ...conf } = config || {};
+      const { headers, ...conf } = config;
       const path = [...endpoint.params]
         .sort()
         .reduceRight(
@@ -41,17 +46,18 @@ export function apiClient<A extends ApiModel>(api: A, axiosInstance: AxiosInstan
       const searchParams = new URLSearchParams(
         Object.keys(endpoint.query || {}).map((param) => [param, `${params[param]}`] as [string, string]),
       );
+      const searchStr = searchParams.toString();
       const requestHeaders: Record<string, any> = {};
       if (endpoint.headers) {
         for (const k in endpoint.headers) {
           requestHeaders[k] = params[k];
         }
       }
-      return axiosInstance.request({
+      return makeRequest(axiosInstance, {
         ...conf,
         // needed because name-clash with axiosconfig.params:
         params: undefined,
-        url: `${path}?${searchParams.toString()}`,
+        url: searchStr.length ? `${path}?${searchStr}` : path,
         method: endpoint.method,
         headers: { ...(headers || {}), ...requestHeaders },
       });

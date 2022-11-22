@@ -5,7 +5,7 @@
   "files": ["dist"],
   "author": "Antal Latinovits",
   "license": "MIT",
-  "main": "./dist/index.js",
+  "main": "./dist/apidrivenAxios.js",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "start": "nodemon",
