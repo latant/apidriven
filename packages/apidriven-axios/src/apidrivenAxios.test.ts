@@ -18,9 +18,12 @@ describe("axios client tests", () => {
       },
       endpoints: {getUser}
     });
-    const client = apiClient(api, axios.create(), async (a, r) => {
-      expect(r.url).toBe(`/users/${USER_ID}`);
-      return {} as any;
+    const client = apiClient(api, {
+      axios: axios.create(), 
+      makeRequest: async (a, r) => {
+        expect(r.url).toBe(`/users/${USER_ID}`);
+        return {} as any;
+      }
     });
     await client.getUser({
       params: {userId: USER_ID}
@@ -44,9 +47,12 @@ describe("axios client tests", () => {
       },
       endpoints: {getUser}
     });
-    const client = apiClient(api, axios.create(), async (a, r) => {
-      expect(r.url).toBe(`/users?userId=${USER_ID}`);
-      return {} as any;
+    const client = apiClient(api, {
+      axios: axios.create(), 
+      makeRequest: async (a, r) => {
+        expect(r.url).toBe(`/users?userId=${USER_ID}`);
+        return {} as any;
+      }
     });
     await client.getUser({
       params: {userId: USER_ID}
@@ -70,10 +76,13 @@ describe("axios client tests", () => {
       },
       endpoints: {getUser}
     });
-    const client = apiClient(api, axios.create(), async (a, r) => {
-      expect(r.url).toBe("/users");
-      expect(r.headers?.["User-ID"]).toBe(USER_ID);
-      return {} as any;
+    const client = apiClient(api, {
+      axios: axios.create(), 
+      makeRequest: async (a, r) => {
+        expect(r.url).toBe("/users");
+        expect(r.headers?.["User-ID"]).toBe(USER_ID);
+        return {} as any;
+      }
     });
     await client.getUser({
       params: {"User-ID": USER_ID}
@@ -99,15 +108,30 @@ describe("axios client tests", () => {
       endpoints: {getUser}
     });
     const client = apiClient(api, {
-      request: async (req) => {
-        axiosInstanceCalled++;
-        return {} as AxiosResponse;
-      }
-    } as AxiosInstance);
+      axios: {
+        request: async (req) => {
+          axiosInstanceCalled++;
+          return {} as AxiosResponse;
+        }
+      } as AxiosInstance
+    });
     expect(axiosInstanceCalled).toBe(0);
     await client.getUser({
       params: {userId: USER_ID}
     });
     expect(axiosInstanceCalled).toBe(1);
+  });
+
+  it("should be successfully created with no options given", async () => {
+    const api = apiDefinition({
+      docs: {
+        info: {
+          title: "",
+          version: ""
+        }
+      },
+      endpoints: {}
+    });
+    apiClient(api);
   });
 });

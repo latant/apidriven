@@ -28,6 +28,8 @@
     "eslint": "8.20.0",
     "@typescript-eslint/eslint-plugin": "5.36.2",
     "@typescript-eslint/parser": "5.36.2",
-    "mkdirp": "1.0.4"
+    "mkdirp": "1.0.4",
+    "ajv": "8.11.2",
+    "@types/node": "18.11.9"
   }
 }

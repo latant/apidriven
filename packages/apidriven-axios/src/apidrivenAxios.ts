@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { z } from "zod";
 import { ApiModel, EndpointModel, EndpointRequestParams } from "apidriven";
 
@@ -26,12 +26,15 @@ type ApiClientImpl<E extends ApiModel["endpoints"]> = {
   [K in keyof E]: (config: EndpointRequestConfig<E[K]>) => Promise<EndpointResponse<E[K]>>
 }
 
-type MakeRequest = (a: AxiosInstance, r: AxiosRequestConfig<any>) => Promise<AxiosResponse<any, any>>
+type ApiClientOptions = {
+  axios?: AxiosInstance;
+  makeRequest?: (a: AxiosInstance, r: AxiosRequestConfig<any>) => Promise<AxiosResponse<any, any>>
+}
 
-export function apiClient<A extends ApiModel>(
-  api: A, axiosInstance: AxiosInstance, makeRequest: MakeRequest = (a, r) => a.request(r)
-): ApiClientImpl<A["endpoints"]> {
+export function apiClient<A extends ApiModel>(api: A, opts?: ApiClientOptions): ApiClientImpl<A["endpoints"]> {
   const client = {} as Record<string, unknown>;
+  const axiosInstance = opts?.axios ?? axios.create();
+  const makeRequest = opts?.makeRequest ?? ((a, r) => a.request(r));
   for (const k in api.endpoints) {
     const endpoint = api.endpoints[k];
     client[k] = (config: EndpointRequestConfig) => {

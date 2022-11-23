@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { ApiModel, EndpointModel, EndpointRequestParams } from "apidriven";
-import { Request, Response, Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
+import "express-async-errors";
+import bodyParser from "body-parser";
 import { z } from "zod";
 
 type EndpointCall<E extends EndpointModel = any> = {
@@ -13,7 +15,8 @@ type EndpointCall<E extends EndpointModel = any> = {
       : (body?: unknown) => Promise<void>
   }
 
-export type ApiRoutes<A extends ApiModel> = EndpointsRoutes<A["endpoints"]>
+export type ApiRoutes<A extends ApiModel> = EndpointsRoutes<A["endpoints"]> 
+  & ((req: Request, res: Response, next: NextFunction) => void)
 
 type EndpointsRoutes<E extends ApiModel["endpoints"]> = {
   [K in keyof E]: (handler: (call: EndpointCall<E[K]>) => void) => void
@@ -94,10 +97,12 @@ const respondWithBody = async (endpoint: EndpointModel, response: Response, body
   response.status(endpoint.status).json(parseResult.data);
 };
 
-export function apiRoutes<A extends ApiModel>(api: A, router: Router): ApiRoutes<A> {
-  const routes = {} as Record<string, unknown>;
+export function apiRoutes<A extends ApiModel>(api: A, opts?: {router?: Router}): ApiRoutes<A> {
+  const router = opts?.router ?? Router();
+  router.use(bodyParser.json());
+  const result = ((req: Request, res: Response, next: NextFunction) => router(req, res, next)) as any;
   Object.entries(api.endpoints).forEach(([id, e]) => {
-    routes[id] = (handler: (call: EndpointCall) => Promise<void>) => {
+    result[id] = (handler: (call: EndpointCall) => Promise<void>) => {
       const routerMatcher = router[e.method].bind(router);
       routerMatcher(e.path, async (req, resp) => {
         await handler({
@@ -116,5 +121,5 @@ export function apiRoutes<A extends ApiModel>(api: A, router: Router): ApiRoutes
       });
     };
   });
-  return routes as ApiRoutes<A>;
+  return result as ApiRoutes<A>;
 }

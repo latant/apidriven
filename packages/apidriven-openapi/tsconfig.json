@@ -11,7 +11,7 @@
     "declaration": true,
     "declarationMap": true,
     "lib": ["ES2020"],
-    "types": ["jest"]
+    "types": ["jest", "node"]
   },
   "include": ["src/**/*"]
 }

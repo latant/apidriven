@@ -5,13 +5,18 @@ specifiers:
   '@rush-temp/apidriven-axios': file:./projects/apidriven-axios.tgz
   '@rush-temp/apidriven-express': file:./projects/apidriven-express.tgz
   '@rush-temp/apidriven-openapi': file:./projects/apidriven-openapi.tgz
+  '@types/body-parser': 1.19.2
   '@types/express': ^4.17.14
   '@types/jest': 29.2.3
+  '@types/node': 18.11.9
   '@typescript-eslint/eslint-plugin': 5.36.2
   '@typescript-eslint/parser': 5.36.2
+  ajv: 8.11.2
   axios: 1.1.2
+  body-parser: 1.20.1
   eslint: 8.20.0
   express: 4.18.2
+  express-async-errors: 3.1.1
   jest: 29.3.1
   jest-junit: 14.0.1
   mkdirp: 1.0.4
@@ -22,23 +27,28 @@ specifiers:
   zod-to-json-schema: ^3.18.1
 
 dependencies:
-  '@rush-temp/apidriven': file:projects/apidriven.tgz
-  '@rush-temp/apidriven-axios': file:projects/apidriven-axios.tgz
-  '@rush-temp/apidriven-express': file:projects/apidriven-express.tgz
+  '@rush-temp/apidriven': file:projects/apidriven.tgz_@types+node@18.11.9
+  '@rush-temp/apidriven-axios': file:projects/apidriven-axios.tgz_@types+node@18.11.9
+  '@rush-temp/apidriven-express': file:projects/apidriven-express.tgz_@types+node@18.11.9
   '@rush-temp/apidriven-openapi': file:projects/apidriven-openapi.tgz
+  '@types/body-parser': 1.19.2
   '@types/express': 4.17.14
   '@types/jest': 29.2.3
+  '@types/node': 18.11.9
   '@typescript-eslint/eslint-plugin': 5.36.2_a76890597c7b7bbff8edf49d8c9a8206
   '@typescript-eslint/parser': 5.36.2_eslint@8.20.0+typescript@4.8.4
+  ajv: 8.11.2
   axios: 1.1.2
+  body-parser: 1.20.1
   eslint: 8.20.0
   express: 4.18.2
-  jest: 29.3.1_ts-node@10.9.1
+  express-async-errors: 3.1.1_express@4.18.2
+  jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
   jest-junit: 14.0.1
   mkdirp: 1.0.4
   nodemon: 2.0.20
   ts-jest: 29.0.3_jest@29.3.1+typescript@4.8.4
-  ts-node: 10.9.1_typescript@4.8.4
+  ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
   typescript: 4.8.4
   zod-to-json-schema: 3.18.1
 
@@ -1047,6 +1057,15 @@ packages:
       uri-js: 4.4.1
     dev: false
 
+  /ajv/8.11.2:
+    resolution: {integrity: sha512-E4bfmKAhGiSTvMfL1Myyycaub+cUEU2/IvpylXkUu7CHBkBj1f/ikdzbD7YQ6FKUbixDxeYvB/xY4fvyroDlQg==}
+    dependencies:
+      fast-deep-equal: 3.1.3
+      json-schema-traverse: 1.0.0
+      require-from-string: 2.0.2
+      uri-js: 4.4.1
+    dev: false
+
   /ansi-escapes/4.3.2:
     resolution: {integrity: sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==}
     engines: {node: '>=8'}
@@ -1726,6 +1745,14 @@ packages:
       jest-util: 29.3.1
     dev: false
 
+  /express-async-errors/3.1.1_express@4.18.2:
+    resolution: {integrity: sha512-h6aK1da4tpqWSbyCa3FxB/V6Ehd4EEB15zyQq9qe75OZBp0krinNKuH4rAY+S/U/2I36vdLAUFSjQJ+TFmODng==}
+    peerDependencies:
+      express: ^4.16.2
+    dependencies:
+      express: 4.18.2
+    dev: false
+
   /express/4.18.2:
     resolution: {integrity: sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==}
     engines: {node: '>= 0.10.0'}
@@ -2204,7 +2231,7 @@ packages:
       - supports-color
     dev: false
 
-  /jest-cli/29.3.1_ts-node@10.9.1:
+  /jest-cli/29.3.1_70d4953900ede8d3dd438a81bd203eaa:
     resolution: {integrity: sha512-TO/ewvwyvPOiBBuWZ0gm04z3WWP8TIK8acgPzE4IxgsLKQgb377NYGrQLc3Wl/7ndWzIH2CDNNsUjGxwLL43VQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -2221,7 +2248,7 @@ packages:
       exit: 0.1.2
       graceful-fs: 4.2.10
       import-local: 3.1.0
-      jest-config: 29.3.1_ts-node@10.9.1
+      jest-config: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-util: 29.3.1
       jest-validate: 29.3.1
       prompts: 2.4.2
@@ -2267,46 +2294,7 @@ packages:
       pretty-format: 29.3.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1_typescript@4.8.4
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /jest-config/29.3.1_ts-node@10.9.1:
-    resolution: {integrity: sha512-y0tFHdj2WnTEhxmGUK1T7fgLen7YK4RtfvpLFBXfQkh2eMJAQq24Vx9472lvn5wg0MAO6B+iPfJfzdR9hJYalg==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    peerDependencies:
-      '@types/node': '*'
-      ts-node: '>=9.0.0'
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      ts-node:
-        optional: true
-    dependencies:
-      '@babel/core': 7.20.2
-      '@jest/test-sequencer': 29.3.1
-      '@jest/types': 29.3.1
-      babel-jest: 29.3.1_@babel+core@7.20.2
-      chalk: 4.1.2
-      ci-info: 3.6.1
-      deepmerge: 4.2.2
-      glob: 7.2.3
-      graceful-fs: 4.2.10
-      jest-circus: 29.3.1
-      jest-environment-node: 29.3.1
-      jest-get-type: 29.2.0
-      jest-regex-util: 29.2.0
-      jest-resolve: 29.3.1
-      jest-runner: 29.3.1
-      jest-util: 29.3.1
-      jest-validate: 29.3.1
-      micromatch: 4.0.5
-      parse-json: 5.2.0
-      pretty-format: 29.3.1
-      slash: 3.0.0
-      strip-json-comments: 3.1.1
-      ts-node: 10.9.1_typescript@4.8.4
+      ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2608,7 +2596,7 @@ packages:
       supports-color: 8.1.1
     dev: false
 
-  /jest/29.3.1_ts-node@10.9.1:
+  /jest/29.3.1_70d4953900ede8d3dd438a81bd203eaa:
     resolution: {integrity: sha512-6iWfL5DTT0Np6UYs/y5Niu7WIfNv/wRTtN5RSXt2DIEft3dx3zPuw/3WJQBCJfmEzvDiEKwoqMbGD9n49+qLSA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -2621,7 +2609,7 @@ packages:
       '@jest/core': 29.3.1_ts-node@10.9.1
       '@jest/types': 29.3.1
       import-local: 3.1.0
-      jest-cli: 29.3.1_ts-node@10.9.1
+      jest-cli: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
     transitivePeerDependencies:
       - '@types/node'
       - supports-color
@@ -2659,6 +2647,10 @@ packages:
 
   /json-schema-traverse/0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
+    dev: false
+
+  /json-schema-traverse/1.0.0:
+    resolution: {integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==}
     dev: false
 
   /json-stable-stringify-without-jsonify/1.0.1:
@@ -3086,6 +3078,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
+  /require-from-string/2.0.2:
+    resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /resolve-cwd/3.0.0:
     resolution: {integrity: sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==}
     engines: {node: '>=8'}
@@ -3396,7 +3393,7 @@ packages:
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
-      jest: 29.3.1_ts-node@10.9.1
+      jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-util: 29.3.1
       json5: 2.2.1
       lodash.memoize: 4.1.2
@@ -3406,7 +3403,7 @@ packages:
       yargs-parser: 21.1.1
     dev: false
 
-  /ts-node/10.9.1_typescript@4.8.4:
+  /ts-node/10.9.1_1049f756a027b302b59330a6f33f12ef:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -3425,6 +3422,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
+      '@types/node': 18.11.9
       acorn: 8.8.1
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -3643,8 +3641,9 @@ packages:
     resolution: {integrity: sha512-LYjZsEDhCdYET9ikFu6dVPGp2YH9DegXjdJToSzD9rO6fy4qiRYFoyEYwps88OseJlPyl2NOe2iJuhEhL7IpEA==}
     dev: false
 
-  file:projects/apidriven-axios.tgz:
+  file:projects/apidriven-axios.tgz_@types+node@18.11.9:
     resolution: {integrity: sha512-/uNXsR3cc9HDLGZcNn9/As9yja+K3txaEXwwndNvVh+E6mFBUN2rf/snOBXupbuQOvr3wa/VV8Nfxsl+yBlZnQ==, tarball: file:projects/apidriven-axios.tgz}
+    id: file:projects/apidriven-axios.tgz
     name: '@rush-temp/apidriven-axios'
     version: 0.0.0
     dependencies:
@@ -3653,12 +3652,12 @@ packages:
       '@typescript-eslint/parser': 5.36.2_eslint@8.20.0+typescript@4.8.4
       axios: 1.1.2
       eslint: 8.20.0
-      jest: 29.3.1_ts-node@10.9.1
+      jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
       nodemon: 2.0.20
       ts-jest: 29.0.3_jest@29.3.1+typescript@4.8.4
-      ts-node: 10.9.1_typescript@4.8.4
+      ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
       typescript: 4.8.4
       zod: 3.19.1
     transitivePeerDependencies:
@@ -3674,23 +3673,28 @@ packages:
       - supports-color
     dev: false
 
-  file:projects/apidriven-express.tgz:
-    resolution: {integrity: sha512-1IYdieEhIa80ZryfrAniy8M2zCTCRBxBcygTyAoYxBBcpfqTMWnGsK5WRfZsU0F45q98TdP7fYGwxyxRhu1a0g==, tarball: file:projects/apidriven-express.tgz}
+  file:projects/apidriven-express.tgz_@types+node@18.11.9:
+    resolution: {integrity: sha512-vOBPst5xjAJH4rgaUaqbAZH56k4mvHxnbz7lMhDJsCkbOp+Kkhdw4ZhnCHaw14sQ9kK+O8xG716qgbmL7aTGAQ==, tarball: file:projects/apidriven-express.tgz}
+    id: file:projects/apidriven-express.tgz
     name: '@rush-temp/apidriven-express'
     version: 0.0.0
     dependencies:
+      '@types/body-parser': 1.19.2
       '@types/express': 4.17.14
       '@types/jest': 29.2.3
       '@typescript-eslint/eslint-plugin': 5.36.2_a76890597c7b7bbff8edf49d8c9a8206
       '@typescript-eslint/parser': 5.36.2_eslint@8.20.0+typescript@4.8.4
+      axios: 1.1.2
+      body-parser: 1.20.1
       eslint: 8.20.0
       express: 4.18.2
-      jest: 29.3.1_ts-node@10.9.1
+      express-async-errors: 3.1.1_express@4.18.2
+      jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
       nodemon: 2.0.20
       ts-jest: 29.0.3_jest@29.3.1+typescript@4.8.4
-      ts-node: 10.9.1_typescript@4.8.4
+      ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
       typescript: 4.8.4
       zod: 3.19.1
     transitivePeerDependencies:
@@ -3700,26 +3704,29 @@ packages:
       - '@swc/wasm'
       - '@types/node'
       - babel-jest
+      - debug
       - esbuild
       - node-notifier
       - supports-color
     dev: false
 
   file:projects/apidriven-openapi.tgz:
-    resolution: {integrity: sha512-XaQYw2ahpKl3MjHu7fzVtzy3nR8iki7pbltFI/qPoo+0DYkOrarfVPaySHkYMI5ulboKWHyBJA9eko8xAmOszg==, tarball: file:projects/apidriven-openapi.tgz}
+    resolution: {integrity: sha512-xC98oZ1M6DIZXBn0dTrK5UDARe1YlzVwLl/pTMxwY7q4nsHXyhpIf3PxR6ayjSMuU4wyaRP4Df9q0RolSNsxPA==, tarball: file:projects/apidriven-openapi.tgz}
     name: '@rush-temp/apidriven-openapi'
     version: 0.0.0
     dependencies:
       '@types/jest': 29.2.3
+      '@types/node': 18.11.9
       '@typescript-eslint/eslint-plugin': 5.36.2_a76890597c7b7bbff8edf49d8c9a8206
       '@typescript-eslint/parser': 5.36.2_eslint@8.20.0+typescript@4.8.4
+      ajv: 8.11.2
       eslint: 8.20.0
-      jest: 29.3.1_ts-node@10.9.1
+      jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
       nodemon: 2.0.20
       ts-jest: 29.0.3_jest@29.3.1+typescript@4.8.4
-      ts-node: 10.9.1_typescript@4.8.4
+      ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
       typescript: 4.8.4
       zod: 3.19.1
       zod-to-json-schema: 3.18.1_zod@3.19.1
@@ -3728,15 +3735,15 @@ packages:
       - '@jest/types'
       - '@swc/core'
       - '@swc/wasm'
-      - '@types/node'
       - babel-jest
       - esbuild
       - node-notifier
       - supports-color
     dev: false
 
-  file:projects/apidriven.tgz:
+  file:projects/apidriven.tgz_@types+node@18.11.9:
     resolution: {integrity: sha512-f+mZCJe8KhtDPcCe94qAfl/FI1MMDdCqNU+kvg3YTqExPutJX5wfPFf6MA7c0HuBJ8pVH8uKdcSd1ldyxWUnxA==, tarball: file:projects/apidriven.tgz}
+    id: file:projects/apidriven.tgz
     name: '@rush-temp/apidriven'
     version: 0.0.0
     dependencies:
@@ -3744,12 +3751,12 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.36.2_a76890597c7b7bbff8edf49d8c9a8206
       '@typescript-eslint/parser': 5.36.2_eslint@8.20.0+typescript@4.8.4
       eslint: 8.20.0
-      jest: 29.3.1_ts-node@10.9.1
+      jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
       nodemon: 2.0.20
       ts-jest: 29.0.3_jest@29.3.1+typescript@4.8.4
-      ts-node: 10.9.1_typescript@4.8.4
+      ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
       typescript: 4.8.4
       zod: 3.19.1
     transitivePeerDependencies:
