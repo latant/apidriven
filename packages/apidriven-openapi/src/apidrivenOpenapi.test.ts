@@ -4,7 +4,7 @@ import { readFileSync } from "fs";
 import { z } from "zod";
 import { apiSpecification } from "./apidrivenOpenapi";
 
-const ajv = new Ajv({strict: false});
+const ajv = new Ajv({ strict: false });
 const specValidator = ajv.compile(readFileSync("oas-chema-3.0.json"));
 const expectValidSpec = (spec: unknown) => {
   expect(specValidator(spec)).toBeTruthy();
@@ -16,10 +16,10 @@ describe("test openapi generation", () => {
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
-      endpoints: {}
+      endpoints: {},
     });
     const spec = apiSpecification(api);
     expectValidSpec(spec);
@@ -33,12 +33,12 @@ describe("test openapi generation", () => {
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
       endpoints: {
-        operation
-      }
+        operation,
+      },
     });
     const spec = apiSpecification(api);
     expectValidSpec(spec);
@@ -57,19 +57,19 @@ describe("test openapi generation", () => {
         bodyParam: z.string(),
       }),
       responseBody: z.object({
-        bodyParam: z.string()
-      })
+        bodyParam: z.string(),
+      }),
     });
     const api = apiDefinition({
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
       endpoints: {
-        operation
-      }
+        operation,
+      },
     });
     const spec = apiSpecification(api);
     expectValidSpec(spec);

@@ -6,32 +6,35 @@ import { ApiModel, EndpointModel, EndpointRequestParams } from "apidriven";
 
 type EndpointRequestBody<E extends EndpointModel> = E["requestBody"] extends z.ZodType
   ? z.infer<E["requestBody"]>
-  : unknown
+  : unknown;
 
 type EndpointRequestConfig<E extends EndpointModel = any> = Omit<
   AxiosRequestConfig<EndpointRequestBody<E>>,
   "method" | "url" | "params"
 > & {
-    [K in "params" as {} extends EndpointRequestParams<E> ? never : K]: EndpointRequestParams<E>
-  } & (E["requestBody"] extends z.ZodType ? { data: z.infer<E["requestBody"]> } : { data?: unknown })
+  [K in "params" as {} extends EndpointRequestParams<E> ? never : K]: EndpointRequestParams<E>;
+} & (E["requestBody"] extends z.ZodType ? { data: z.infer<E["requestBody"]> } : { data?: unknown });
 
 type EndpointResponse<E extends EndpointModel> = AxiosResponse<
   E["responseBody"] extends z.ZodType ? z.infer<E["responseBody"]> : unknown,
   EndpointRequestBody<E>
->
+>;
 
-export type ApiClient<A extends ApiModel> = ApiClientImpl<A["endpoints"]>
+export type ApiClient<A extends ApiModel> = ApiClientImpl<A["endpoints"]>;
 
 type ApiClientImpl<E extends ApiModel["endpoints"]> = {
-  [K in keyof E]: (config: EndpointRequestConfig<E[K]>) => Promise<EndpointResponse<E[K]>>
-}
+  [K in keyof E]: (config: EndpointRequestConfig<E[K]>) => Promise<EndpointResponse<E[K]>>;
+};
 
 type ApiClientOptions = {
   axios?: AxiosInstance;
-  makeRequest?: (a: AxiosInstance, r: AxiosRequestConfig<any>) => Promise<AxiosResponse<any, any>>
-}
+  makeRequest?: (a: AxiosInstance, r: AxiosRequestConfig<any>) => Promise<AxiosResponse<any, any>>;
+};
 
-export function apiClient<A extends ApiModel>(api: A, opts?: ApiClientOptions): ApiClientImpl<A["endpoints"]> {
+export function apiClient<A extends ApiModel>(
+  api: A,
+  opts?: ApiClientOptions
+): ApiClientImpl<A["endpoints"]> {
   const client = {} as Record<string, unknown>;
   const axiosInstance = opts?.axios ?? axios.create();
   const makeRequest = opts?.makeRequest ?? ((a, r) => a.request(r));
@@ -43,11 +46,14 @@ export function apiClient<A extends ApiModel>(api: A, opts?: ApiClientOptions): 
       const path = [...endpoint.params]
         .sort()
         .reduceRight(
-          (acc, param) => acc.replace(`:${param}`, `${encodeURIComponent(params[param] as string)}`),
-          endpoint.path,
+          (acc, param) =>
+            acc.replace(`:${param}`, `${encodeURIComponent(params[param] as string)}`),
+          endpoint.path
         );
       const searchParams = new URLSearchParams(
-        Object.keys(endpoint.query || {}).map((param) => [param, `${params[param]}`] as [string, string]),
+        Object.keys(endpoint.query || {}).map(
+          (param) => [param, `${params[param]}`] as [string, string]
+        )
       );
       const searchStr = searchParams.toString();
       const requestHeaders: Record<string, any> = {};

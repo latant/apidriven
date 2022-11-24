@@ -6,45 +6,50 @@ import { AddressInfo } from "net";
 import { z } from "zod";
 import { apiRoutes } from "./apidrivenExpress";
 
-const createServer = (app: Application) => new Promise<Server>((resolve, reject) => {
-  const server = app.listen(0, () => {
-    resolve(server);
-  }).on("error", (e) => {
-    reject(e);
+const createServer = (app: Application) =>
+  new Promise<Server>((resolve, reject) => {
+    const server = app
+      .listen(0, () => {
+        resolve(server);
+      })
+      .on("error", (e) => {
+        reject(e);
+      });
   });
-});
 
 const createClient = (server: Server) => {
   const address = server.address() as AddressInfo;
   return axios.create({
-    baseURL: `http://localhost:${address.port}`, 
+    baseURL: `http://localhost:${address.port}`,
     validateStatus() {
       return true;
-    } 
+    },
   });
 };
 
-const stopServer = (server: Server) => new Promise<void>((resolve, reject) => {
-  server.close((err) => {
-    if (err) reject(); else resolve();
+const stopServer = (server: Server) =>
+  new Promise<void>((resolve, reject) => {
+    server.close((err) => {
+      if (err) reject();
+      else resolve();
+    });
   });
-});
 
 describe("test apidriven express routes", () => {
   it("should take path parameters from the url", async () => {
     const USER_ID = "0";
     let getUserCalled = 0;
     const getUser = GET("/users/:userId", {
-      status: 200
+      status: 200,
     });
     const api = apiDefinition({
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
-      endpoints: {getUser}
+      endpoints: { getUser },
     });
     const routes = apiRoutes(api);
     routes.getUser(async (call) => {
@@ -69,17 +74,17 @@ describe("test apidriven express routes", () => {
     const getUser = GET("/users", {
       status: 200,
       query: {
-        userId: z.string()
-      }
+        userId: z.string(),
+      },
     });
     const api = apiDefinition({
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
-      endpoints: {getUser}
+      endpoints: { getUser },
     });
     const routes = apiRoutes(api);
     routes.getUser(async (call) => {
@@ -103,17 +108,17 @@ describe("test apidriven express routes", () => {
     const getUser = GET("/users", {
       status: 200,
       query: {
-        userId: z.string()
-      }
+        userId: z.string(),
+      },
     });
     const api = apiDefinition({
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
-      endpoints: {getUser}
+      endpoints: { getUser },
     });
     const routes = apiRoutes(api);
     routes.getUser(async () => fail());
@@ -132,17 +137,17 @@ describe("test apidriven express routes", () => {
     const getUser = GET("/users", {
       status: 200,
       headers: {
-        "User-ID": z.string()
-      }
+        "User-ID": z.string(),
+      },
     });
     const api = apiDefinition({
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
-      endpoints: {getUser}
+      endpoints: { getUser },
     });
     const routes = apiRoutes(api);
     routes.getUser(async (call) => {
@@ -155,7 +160,7 @@ describe("test apidriven express routes", () => {
     const server = await createServer(app);
     const client = createClient(server);
     expect(getUserCalled).toBe(0);
-    const response = await client.get("/users", {headers: {"User-ID": USER_ID}});
+    const response = await client.get("/users", { headers: { "User-ID": USER_ID } });
     expect(response.status).toBe(200);
     expect(getUserCalled).toBe(1);
     await stopServer(server);
@@ -165,17 +170,17 @@ describe("test apidriven express routes", () => {
     const getUser = GET("/users", {
       status: 200,
       headers: {
-        "User-ID": z.string()
-      }
+        "User-ID": z.string(),
+      },
     });
     const api = apiDefinition({
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
-      endpoints: {getUser}
+      endpoints: { getUser },
     });
     const routes = apiRoutes(api);
     routes.getUser(async () => fail());
@@ -194,17 +199,17 @@ describe("test apidriven express routes", () => {
     const createUser = POST("/users", {
       status: 201,
       requestBody: z.strictObject({
-        userId: z.string()
-      })
+        userId: z.string(),
+      }),
     });
     const api = apiDefinition({
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
-      endpoints: {createUser}
+      endpoints: { createUser },
     });
     const routes = apiRoutes(api);
     routes.createUser(async (call) => {
@@ -217,7 +222,7 @@ describe("test apidriven express routes", () => {
     const server = await createServer(app);
     const client = createClient(server);
     expect(getUserCalled).toBe(0);
-    const response = await client.post("/users", {userId: USER_ID});
+    const response = await client.post("/users", { userId: USER_ID });
     expect(response.status).toBe(201);
     expect(getUserCalled).toBe(1);
     await stopServer(server);
@@ -227,17 +232,17 @@ describe("test apidriven express routes", () => {
     const createUser = POST("/users", {
       status: 201,
       requestBody: z.strictObject({
-        userId: z.string()
-      })
+        userId: z.string(),
+      }),
     });
     const api = apiDefinition({
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
-      endpoints: {createUser}
+      endpoints: { createUser },
     });
     const routes = apiRoutes(api);
     routes.createUser(async () => fail());
@@ -245,7 +250,7 @@ describe("test apidriven express routes", () => {
     app.use(routes);
     const server = await createServer(app);
     const client = createClient(server);
-    const response = await client.post("/users", {userId: 1});
+    const response = await client.post("/users", { userId: 1 });
     expect(response.status).toBe(500);
     await stopServer(server);
   });
@@ -256,17 +261,17 @@ describe("test apidriven express routes", () => {
     const getUser = GET("/users", {
       status: 200,
       responseBody: z.object({
-        userId: z.string()
-      })
+        userId: z.string(),
+      }),
     });
     const api = apiDefinition({
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
-      endpoints: {getUser}
+      endpoints: { getUser },
     });
     const routes = apiRoutes(api);
     routes.getUser(async (call) => {
@@ -282,7 +287,7 @@ describe("test apidriven express routes", () => {
     expect(getUserCalled).toBe(0);
     const response = await client.get("/users");
     expect(response.status).toBe(200);
-    expect(response.data).toEqual({userId: USER_ID});
+    expect(response.data).toEqual({ userId: USER_ID });
     expect(getUserCalled).toBe(1);
     await stopServer(server);
   });
@@ -292,22 +297,22 @@ describe("test apidriven express routes", () => {
     const getUser = GET("/users", {
       status: 200,
       responseBody: z.object({
-        userId: z.string()
-      })
+        userId: z.string(),
+      }),
     });
     const api = apiDefinition({
       docs: {
         info: {
           title: "",
-          version: ""
-        }
+          version: "",
+        },
       },
-      endpoints: {getUser}
+      endpoints: { getUser },
     });
     const routes = apiRoutes(api);
     routes.getUser(async (call) => {
       getUserCalled++;
-      await call.respond({userId: 0 as any});
+      await call.respond({ userId: 0 as any });
     });
     const app = express();
     app.use(routes);

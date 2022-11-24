@@ -6,21 +6,21 @@ import bodyParser from "body-parser";
 import { z } from "zod";
 
 type EndpointCall<E extends EndpointModel = any> = {
-  request: Request
-  response: Response
-  params: EndpointRequestParams<E>
+  request: Request;
+  response: Response;
+  params: EndpointRequestParams<E>;
 } & (E["requestBody"] extends z.ZodType ? { requestBody: z.infer<E["requestBody"]> } : {}) & {
     respond: E["responseBody"] extends z.ZodType
       ? (data: z.infer<E["responseBody"]>) => Promise<void>
-      : (body?: unknown) => Promise<void>
-  }
+      : (body?: unknown) => Promise<void>;
+  };
 
-export type ApiRoutes<A extends ApiModel> = EndpointsRoutes<A["endpoints"]> 
-  & ((req: Request, res: Response, next: NextFunction) => void)
+export type ApiRoutes<A extends ApiModel> = EndpointsRoutes<A["endpoints"]> &
+  ((req: Request, res: Response, next: NextFunction) => void);
 
 type EndpointsRoutes<E extends ApiModel["endpoints"]> = {
-  [K in keyof E]: (handler: (call: EndpointCall<E[K]>) => void) => void
-}
+  [K in keyof E]: (handler: (call: EndpointCall<E[K]>) => void) => void;
+};
 
 class ApiError extends Error {
   zodError: z.ZodError;
@@ -65,7 +65,7 @@ const getQueryParams = (endpoint: EndpointModel, request: Request) => {
 const getHeaders = (endpoint: EndpointModel, request: Request) => {
   // request.headers has only lowercase keys
   const originalHeaders = Object.fromEntries(
-    Object.keys(endpoint.headers ?? {}).map((header) => [header, request.header(header)]),
+    Object.keys(endpoint.headers ?? {}).map((header) => [header, request.header(header)])
   );
   const parseResult = z.strictObject(endpoint.headers ?? {}).safeParse(originalHeaders);
   if (!parseResult.success) {
@@ -85,7 +85,11 @@ const getRequestBody = (endpoint: EndpointModel, request: Request) => {
   return parseResult.data;
 };
 
-const respondWithBody = async (endpoint: EndpointModel, response: Response, body: unknown): Promise<void> => {
+const respondWithBody = async (
+  endpoint: EndpointModel,
+  response: Response,
+  body: unknown
+): Promise<void> => {
   if (!endpoint.responseBody) {
     response.status(endpoint.status).end(body);
     return;
@@ -97,10 +101,11 @@ const respondWithBody = async (endpoint: EndpointModel, response: Response, body
   response.status(endpoint.status).json(parseResult.data);
 };
 
-export function apiRoutes<A extends ApiModel>(api: A, opts?: {router?: Router}): ApiRoutes<A> {
+export function apiRoutes<A extends ApiModel>(api: A, opts?: { router?: Router }): ApiRoutes<A> {
   const router = opts?.router ?? Router();
   router.use(bodyParser.json());
-  const result = ((req: Request, res: Response, next: NextFunction) => router(req, res, next)) as any;
+  const result = ((req: Request, res: Response, next: NextFunction) =>
+    router(req, res, next)) as any;
   Object.entries(api.endpoints).forEach(([id, e]) => {
     result[id] = (handler: (call: EndpointCall) => Promise<void>) => {
       const routerMatcher = router[e.method].bind(router);

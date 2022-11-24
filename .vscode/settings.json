@@ -4,5 +4,8 @@
     "packages/apidriven-axios",
     "packages/apidriven-express",
     "packages/apidriven-openapi",
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

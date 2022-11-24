@@ -15,12 +15,15 @@ specifiers:
   axios: 1.1.2
   body-parser: 1.20.1
   eslint: 8.20.0
+  eslint-config-prettier: 8.5.0
+  eslint-plugin-prettier: 4.2.1
   express: 4.18.2
   express-async-errors: 3.1.1
   jest: 29.3.1
   jest-junit: 14.0.1
   mkdirp: 1.0.4
   nodemon: 2.0.20
+  prettier: 2.6.2
   ts-jest: 29.0.3
   ts-node: 10.9.1
   typescript: 4.8.4
@@ -41,12 +44,15 @@ dependencies:
   axios: 1.1.2
   body-parser: 1.20.1
   eslint: 8.20.0
+  eslint-config-prettier: 8.5.0_eslint@8.20.0
+  eslint-plugin-prettier: 4.2.1_2b0e0b01b1e3f2b77264fbc05797f122
   express: 4.18.2
   express-async-errors: 3.1.1_express@4.18.2
   jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
   jest-junit: 14.0.1
   mkdirp: 1.0.4
   nodemon: 2.0.20
+  prettier: 2.6.2
   ts-jest: 29.0.3_jest@29.3.1+typescript@4.8.4
   ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
   typescript: 4.8.4
@@ -1585,6 +1591,32 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
+  /eslint-config-prettier/8.5.0_eslint@8.20.0:
+    resolution: {integrity: sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==}
+    hasBin: true
+    peerDependencies:
+      eslint: '>=7.0.0'
+    dependencies:
+      eslint: 8.20.0
+    dev: false
+
+  /eslint-plugin-prettier/4.2.1_2b0e0b01b1e3f2b77264fbc05797f122:
+    resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      eslint: '>=7.28.0'
+      eslint-config-prettier: '*'
+      prettier: '>=2.0.0'
+    peerDependenciesMeta:
+      eslint-config-prettier:
+        optional: true
+    dependencies:
+      eslint: 8.20.0
+      eslint-config-prettier: 8.5.0_eslint@8.20.0
+      prettier: 2.6.2
+      prettier-linter-helpers: 1.0.0
+    dev: false
+
   /eslint-scope/5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
     engines: {node: '>=8.0.0'}
@@ -1792,6 +1824,10 @@ packages:
 
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
+    dev: false
+
+  /fast-diff/1.2.0:
+    resolution: {integrity: sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==}
     dev: false
 
   /fast-glob/3.2.12:
@@ -2993,6 +3029,19 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: false
 
+  /prettier-linter-helpers/1.0.0:
+    resolution: {integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      fast-diff: 1.2.0
+    dev: false
+
+  /prettier/2.6.2:
+    resolution: {integrity: sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: false
+
   /pretty-format/29.3.1:
     resolution: {integrity: sha512-FyLnmb1cYJV8biEIiRyzRFvs2lry7PPIvOqKVe1GCUEYg4YGmlx1qG9EJNMxArYm7piII4qb8UV1Pncq5dxmcg==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -3642,7 +3691,7 @@ packages:
     dev: false
 
   file:projects/apidriven-axios.tgz_@types+node@18.11.9:
-    resolution: {integrity: sha512-/uNXsR3cc9HDLGZcNn9/As9yja+K3txaEXwwndNvVh+E6mFBUN2rf/snOBXupbuQOvr3wa/VV8Nfxsl+yBlZnQ==, tarball: file:projects/apidriven-axios.tgz}
+    resolution: {integrity: sha512-kU0Q1QvVSFhPZjxFJrwSNBS2CRoT2ZQHPGfLTgrc1fj2KCma+GFxpw1VaN0m+oippW36gpa002AvK6yO5GGpDQ==, tarball: file:projects/apidriven-axios.tgz}
     id: file:projects/apidriven-axios.tgz
     name: '@rush-temp/apidriven-axios'
     version: 0.0.0
@@ -3652,10 +3701,13 @@ packages:
       '@typescript-eslint/parser': 5.36.2_eslint@8.20.0+typescript@4.8.4
       axios: 1.1.2
       eslint: 8.20.0
+      eslint-config-prettier: 8.5.0_eslint@8.20.0
+      eslint-plugin-prettier: 4.2.1_2b0e0b01b1e3f2b77264fbc05797f122
       jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
       nodemon: 2.0.20
+      prettier: 2.6.2
       ts-jest: 29.0.3_jest@29.3.1+typescript@4.8.4
       ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
       typescript: 4.8.4
@@ -3674,7 +3726,7 @@ packages:
     dev: false
 
   file:projects/apidriven-express.tgz_@types+node@18.11.9:
-    resolution: {integrity: sha512-vOBPst5xjAJH4rgaUaqbAZH56k4mvHxnbz7lMhDJsCkbOp+Kkhdw4ZhnCHaw14sQ9kK+O8xG716qgbmL7aTGAQ==, tarball: file:projects/apidriven-express.tgz}
+    resolution: {integrity: sha512-VP5qJ3//0t4ezIUm2f7SLbV3iAlExMy2g2veouUYqwbthF5QlaawpISLqy9Cvl+mjfYlppDFbWYuJs1aBRhoQg==, tarball: file:projects/apidriven-express.tgz}
     id: file:projects/apidriven-express.tgz
     name: '@rush-temp/apidriven-express'
     version: 0.0.0
@@ -3687,12 +3739,15 @@ packages:
       axios: 1.1.2
       body-parser: 1.20.1
       eslint: 8.20.0
+      eslint-config-prettier: 8.5.0_eslint@8.20.0
+      eslint-plugin-prettier: 4.2.1_2b0e0b01b1e3f2b77264fbc05797f122
       express: 4.18.2
       express-async-errors: 3.1.1_express@4.18.2
       jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
       nodemon: 2.0.20
+      prettier: 2.6.2
       ts-jest: 29.0.3_jest@29.3.1+typescript@4.8.4
       ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
       typescript: 4.8.4
@@ -3711,7 +3766,7 @@ packages:
     dev: false
 
   file:projects/apidriven-openapi.tgz:
-    resolution: {integrity: sha512-xC98oZ1M6DIZXBn0dTrK5UDARe1YlzVwLl/pTMxwY7q4nsHXyhpIf3PxR6ayjSMuU4wyaRP4Df9q0RolSNsxPA==, tarball: file:projects/apidriven-openapi.tgz}
+    resolution: {integrity: sha512-Tt8Z57tHGpm5WpM8ftzWRXLf67jGYo54OqPHFw5FBMxrOC+FSgrDNtM1kcmt2YXY/0ALu0cc7io2bbGqECEW6Q==, tarball: file:projects/apidriven-openapi.tgz}
     name: '@rush-temp/apidriven-openapi'
     version: 0.0.0
     dependencies:
@@ -3721,10 +3776,13 @@ packages:
       '@typescript-eslint/parser': 5.36.2_eslint@8.20.0+typescript@4.8.4
       ajv: 8.11.2
       eslint: 8.20.0
+      eslint-config-prettier: 8.5.0_eslint@8.20.0
+      eslint-plugin-prettier: 4.2.1_2b0e0b01b1e3f2b77264fbc05797f122
       jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
       nodemon: 2.0.20
+      prettier: 2.6.2
       ts-jest: 29.0.3_jest@29.3.1+typescript@4.8.4
       ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
       typescript: 4.8.4
@@ -3742,7 +3800,7 @@ packages:
     dev: false
 
   file:projects/apidriven.tgz_@types+node@18.11.9:
-    resolution: {integrity: sha512-f+mZCJe8KhtDPcCe94qAfl/FI1MMDdCqNU+kvg3YTqExPutJX5wfPFf6MA7c0HuBJ8pVH8uKdcSd1ldyxWUnxA==, tarball: file:projects/apidriven.tgz}
+    resolution: {integrity: sha512-q78x00cKS10D8Q0q2pgHi4jjK3t/5/AoDkUsh/8JlRVAdDWqWTitAmNrEAuODmVsftHfN6KIdSPKtP/F0PqsAw==, tarball: file:projects/apidriven.tgz}
     id: file:projects/apidriven.tgz
     name: '@rush-temp/apidriven'
     version: 0.0.0
@@ -3751,10 +3809,13 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.36.2_a76890597c7b7bbff8edf49d8c9a8206
       '@typescript-eslint/parser': 5.36.2_eslint@8.20.0+typescript@4.8.4
       eslint: 8.20.0
+      eslint-config-prettier: 8.5.0_eslint@8.20.0
+      eslint-plugin-prettier: 4.2.1_2b0e0b01b1e3f2b77264fbc05797f122
       jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
       nodemon: 2.0.20
+      prettier: 2.6.2
       ts-jest: 29.0.3_jest@29.3.1+typescript@4.8.4
       ts-node: 10.9.1_1049f756a027b302b59330a6f33f12ef
       typescript: 4.8.4
