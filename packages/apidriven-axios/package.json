@@ -2,10 +2,12 @@
   "name": "apidriven-axios",
   "version": "0.0.0",
   "description": "Type-safe client implementation for the common REST API definition on top of Axios",
-  "files": ["dist"],
   "author": "Antal Latinovits",
   "license": "MIT",
   "main": "./dist/apidrivenAxios.js",
+  "types": "dist/apidrivenAxios.d.ts",
+  "files": ["dist"],
+  "keywords": ["api", "driven", "definition", "type-safety", "axios", "client", "frontend"],
   "scripts": {
     "start": "nodemon --config config/nodemon.json",
     "build": "tsc --project config/tsconfig.build.json",

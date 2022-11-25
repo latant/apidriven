@@ -4,8 +4,10 @@
   "author": "Antal Latinovits",
   "license": "MIT",
   "description": "OpenAPI specification generator for the common REST API definition",
-  "files": ["dist"],
   "main": "./dist/apidrivenOpenapi.js",
+  "types": "dist/apidrivenOpenapi.d.ts",
+  "files": ["dist"],
+  "keywords": ["api", "driven", "definition", "type-safety", "openapi", "generate", "automatic"],
   "scripts": {
     "start": "nodemon --config config/nodemon.json",
     "build": "tsc --project config/tsconfig.build.json",

@@ -4,8 +4,10 @@
   "author": "Antal Latinovits",
   "license": "MIT",
   "description": "Type-safe routing implementation for the common REST API definition on top of Express.js",
-  "files": ["dist"],
   "main": "./dist/apidrivenExpress.js",
+  "types": "dist/apidrivenExpress.d.ts",
+  "files": ["dist"],
+  "keywords": ["api", "driven", "definition", "type-safety", "express", "router", "backend", "node"],
   "scripts": {
     "start": "nodemon --config config/nodemon.json",
     "build": "tsc --project config/tsconfig.build.json",

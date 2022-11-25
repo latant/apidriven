@@ -4,8 +4,10 @@
   "author": "Antal Latinovits",
   "license": "MIT",
   "description": "Common REST API definition to reuse on both frontend and backend in a type-safe way",
-  "files": ["dist"],
   "main": "./dist/apidriven.js",
+  "types": "dist/apidriven.d.ts",
+  "files": ["dist"],
+  "keywords": ["api", "driven", "definition", "type-safety"],
   "scripts": {
     "start": "nodemon --config config/nodemon.json",
     "build": "tsc --project config/tsconfig.build.json",
