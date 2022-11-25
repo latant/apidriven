@@ -7,10 +7,10 @@
   "files": ["dist"],
   "main": "./dist/apidrivenExpress.js",
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "start": "nodemon",
-    "test": "jest --coverage",
-    "lint": "mkdirp lint && eslint src > lint/apidriven-express.lint.log"
+    "start": "nodemon --config config/nodemon.json",
+    "build": "tsc --project config/tsconfig.build.json",
+    "test": "(mkdirp cov && jest --config config/jest.config.json --coverage 2>&1) || (realpath cov/index.html && exit 1)",
+    "lint": "(mkdirp lint && eslint src > lint/lint.log) || (realpath lint/lint.log && exit 1)"
   },
   "dependencies": {
     "zod": "3.19.1",
@@ -29,13 +29,15 @@
     "jest-junit": "14.0.1",
     "ts-jest": "29.0.3",
     "@types/jest": "29.2.3",
+    "@types/node": "18.11.9",
     "eslint": "8.20.0",
     "@typescript-eslint/eslint-plugin": "5.36.2",
     "@typescript-eslint/parser": "5.36.2",
     "prettier": "2.6.2",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-config-prettier": "8.5.0",
+    "axios": "1.1.2",
     "mkdirp": "1.0.4",
-    "axios": "1.1.2"
+    "fs.realpath": "1.0.0"
   }
 }

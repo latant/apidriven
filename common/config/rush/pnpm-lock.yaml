@@ -19,6 +19,7 @@ specifiers:
   eslint-plugin-prettier: 4.2.1
   express: 4.18.2
   express-async-errors: 3.1.1
+  fs.realpath: 1.0.0
   jest: 29.3.1
   jest-junit: 14.0.1
   mkdirp: 1.0.4
@@ -32,7 +33,7 @@ specifiers:
 dependencies:
   '@rush-temp/apidriven': file:projects/apidriven.tgz_@types+node@18.11.9
   '@rush-temp/apidriven-axios': file:projects/apidriven-axios.tgz_@types+node@18.11.9
-  '@rush-temp/apidriven-express': file:projects/apidriven-express.tgz_@types+node@18.11.9
+  '@rush-temp/apidriven-express': file:projects/apidriven-express.tgz
   '@rush-temp/apidriven-openapi': file:projects/apidriven-openapi.tgz
   '@types/body-parser': 1.19.2
   '@types/express': 4.17.14
@@ -48,6 +49,7 @@ dependencies:
   eslint-plugin-prettier: 4.2.1_2b0e0b01b1e3f2b77264fbc05797f122
   express: 4.18.2
   express-async-errors: 3.1.1_express@4.18.2
+  fs.realpath: 1.0.0
   jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
   jest-junit: 14.0.1
   mkdirp: 1.0.4
@@ -3691,7 +3693,7 @@ packages:
     dev: false
 
   file:projects/apidriven-axios.tgz_@types+node@18.11.9:
-    resolution: {integrity: sha512-kU0Q1QvVSFhPZjxFJrwSNBS2CRoT2ZQHPGfLTgrc1fj2KCma+GFxpw1VaN0m+oippW36gpa002AvK6yO5GGpDQ==, tarball: file:projects/apidriven-axios.tgz}
+    resolution: {integrity: sha512-UXvl3hiViX26ypFgrwThuvNpitm0dcNTntlXoM7+td0SXp3X8zhkiLdBWXCTvYfxQpz2i7XTP+SpEgsxONgsKQ==, tarball: file:projects/apidriven-axios.tgz}
     id: file:projects/apidriven-axios.tgz
     name: '@rush-temp/apidriven-axios'
     version: 0.0.0
@@ -3703,6 +3705,7 @@ packages:
       eslint: 8.20.0
       eslint-config-prettier: 8.5.0_eslint@8.20.0
       eslint-plugin-prettier: 4.2.1_2b0e0b01b1e3f2b77264fbc05797f122
+      fs.realpath: 1.0.0
       jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
@@ -3725,15 +3728,15 @@ packages:
       - supports-color
     dev: false
 
-  file:projects/apidriven-express.tgz_@types+node@18.11.9:
-    resolution: {integrity: sha512-VP5qJ3//0t4ezIUm2f7SLbV3iAlExMy2g2veouUYqwbthF5QlaawpISLqy9Cvl+mjfYlppDFbWYuJs1aBRhoQg==, tarball: file:projects/apidriven-express.tgz}
-    id: file:projects/apidriven-express.tgz
+  file:projects/apidriven-express.tgz:
+    resolution: {integrity: sha512-9CPaYnkYBZ7GJWP18YBH6AeXlvECRP25x1Bx3Qq+R/tkj4b9aThK/AmPRlqOZ2tL5MZrjYzHulLdguamCaLqUQ==, tarball: file:projects/apidriven-express.tgz}
     name: '@rush-temp/apidriven-express'
     version: 0.0.0
     dependencies:
       '@types/body-parser': 1.19.2
       '@types/express': 4.17.14
       '@types/jest': 29.2.3
+      '@types/node': 18.11.9
       '@typescript-eslint/eslint-plugin': 5.36.2_a76890597c7b7bbff8edf49d8c9a8206
       '@typescript-eslint/parser': 5.36.2_eslint@8.20.0+typescript@4.8.4
       axios: 1.1.2
@@ -3743,6 +3746,7 @@ packages:
       eslint-plugin-prettier: 4.2.1_2b0e0b01b1e3f2b77264fbc05797f122
       express: 4.18.2
       express-async-errors: 3.1.1_express@4.18.2
+      fs.realpath: 1.0.0
       jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
@@ -3757,7 +3761,6 @@ packages:
       - '@jest/types'
       - '@swc/core'
       - '@swc/wasm'
-      - '@types/node'
       - babel-jest
       - debug
       - esbuild
@@ -3766,7 +3769,7 @@ packages:
     dev: false
 
   file:projects/apidriven-openapi.tgz:
-    resolution: {integrity: sha512-Tt8Z57tHGpm5WpM8ftzWRXLf67jGYo54OqPHFw5FBMxrOC+FSgrDNtM1kcmt2YXY/0ALu0cc7io2bbGqECEW6Q==, tarball: file:projects/apidriven-openapi.tgz}
+    resolution: {integrity: sha512-oRWznGcReVqu6PiF//qwu/qEqn6XKZY/3xCvbSc/eRY1Fenq78lIf/kTcQfL7a9qCD5xz3ZSG1nQXDnIMpeE4Q==, tarball: file:projects/apidriven-openapi.tgz}
     name: '@rush-temp/apidriven-openapi'
     version: 0.0.0
     dependencies:
@@ -3778,6 +3781,7 @@ packages:
       eslint: 8.20.0
       eslint-config-prettier: 8.5.0_eslint@8.20.0
       eslint-plugin-prettier: 4.2.1_2b0e0b01b1e3f2b77264fbc05797f122
+      fs.realpath: 1.0.0
       jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
@@ -3800,7 +3804,7 @@ packages:
     dev: false
 
   file:projects/apidriven.tgz_@types+node@18.11.9:
-    resolution: {integrity: sha512-q78x00cKS10D8Q0q2pgHi4jjK3t/5/AoDkUsh/8JlRVAdDWqWTitAmNrEAuODmVsftHfN6KIdSPKtP/F0PqsAw==, tarball: file:projects/apidriven.tgz}
+    resolution: {integrity: sha512-gITiNpHLoc+5ditlbj1PbLsWKNi3UIYVM5e5+l+jnSeb8vScNpxkyBztc79Hv+XwkVz1XUikuYP7JPiWlm1mWQ==, tarball: file:projects/apidriven.tgz}
     id: file:projects/apidriven.tgz
     name: '@rush-temp/apidriven'
     version: 0.0.0
@@ -3811,6 +3815,7 @@ packages:
       eslint: 8.20.0
       eslint-config-prettier: 8.5.0_eslint@8.20.0
       eslint-plugin-prettier: 4.2.1_2b0e0b01b1e3f2b77264fbc05797f122
+      fs.realpath: 1.0.0
       jest: 29.3.1_70d4953900ede8d3dd438a81bd203eaa
       jest-junit: 14.0.1
       mkdirp: 1.0.4
