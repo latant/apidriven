@@ -10,10 +10,12 @@ type EndpointRequestBody<E extends EndpointModel> = E["requestBody"] extends z.Z
 
 type EndpointRequestConfig<E extends EndpointModel = any> = Omit<
   AxiosRequestConfig<EndpointRequestBody<E>>,
-  "method" | "url" | "params"
-> & {
-  [K in "params" as {} extends EndpointRequestParams<E> ? never : K]: EndpointRequestParams<E>;
-} & (E["requestBody"] extends z.ZodType ? { data: z.infer<E["requestBody"]> } : { data?: unknown });
+  "method" | "url" | "params" | "data"
+> &
+  ({} extends EndpointRequestParams<E>
+    ? { params?: EndpointRequestParams<E> }
+    : { params: EndpointRequestParams<E> }) &
+  (E["requestBody"] extends z.ZodType ? { data: z.infer<E["requestBody"]> } : { data?: unknown });
 
 type EndpointResponse<E extends EndpointModel> = AxiosResponse<
   E["responseBody"] extends z.ZodType ? z.infer<E["responseBody"]> : unknown,
