@@ -8,7 +8,7 @@
   "preset": "ts-jest",
   "testEnvironment": "node",
   "testPathIgnorePatterns": ["node_modules/", "dist/"],
-  "collectCoverageFrom": ["src/**/*.{ts,tsx}", "!**/node_modules/**"],
+  "collectCoverageFrom": ["src/**/*.{ts,tsx}", "!**/node_modules/**", "!src/test/**"],
   "modulePathIgnorePatterns": ["dist"],
   "coverageReporters": ["html"],
   "testTimeout": 10000,
